@@ -1,0 +1,13 @@
+<h1>Create an article</h1>
+ <% if @new.errors.any? %>
+  <h2> The following errors are preventing the article from getting created</h2>
+  <ul>
+    <% @new_article.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+    <% end %>
+  </ul>
+ <% end %>
+<% @article = @new %>
+<%= render 'form' %>

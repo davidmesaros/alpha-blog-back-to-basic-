@@ -1,0 +1,16 @@
+<h1> List of all the Article</h1>
+<ul>
+  <% @All_Articles.each do |list| %>
+  <li>
+    <p>
+      Client id: <%= list.id %> <br>
+      Title : <%= list.title %><br>
+      description: <%= list.description %><br>
+      <%= link_to 'new', new_article_path %> || 
+      <%= link_to 'edit', edit_article_path(list) %> ||
+      <%= link_to 'show', article_path(list) %> ||
+      <%= link_to 'Delete', article_path(list), :method => :delete, data: {confirm: "Are you Sure Budy"} %>
+    </p>
+  </li>
+  <% end %>
+</ul>
