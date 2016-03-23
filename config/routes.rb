@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "articles#index"
+  root "welcome#index"
   resources :articles
   #get "new/articles" => "articles#new"
   # The priority is based upon order of creation: first created -> highest priority.
