@@ -1,13 +1,6 @@
+
 <h1 align = 'center'> Edit existing article</h1>
- <% if @edit.errors.any? %>
-  <h2> The following errors are preventing the article from getting created</h2>
-  <ul>
-    <% @edit.errors.full_messages.each do |msg| %>
-      <li>
-        <%= msg %>
-      </li>
-    <% end %>
-  </ul>
- <% end %>
-<% @article = @edit %>
-<%= render 'form' %>
+ 
+  <% @article = @edit %>
+  <%= render 'shared/error_messages_flash' , obj: @article %>
+  <%= render 'form' %>

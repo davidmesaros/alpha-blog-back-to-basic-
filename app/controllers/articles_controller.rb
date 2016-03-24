@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     # render text: params[:article].inspect
     @new_article = Article.new(params_article)
     if @new_article.save
-      flash[:notice] = "Article was successfully created"  
+      flash[:success] = "Article was successfully created"  
       redirect_to article_path(@new_article)
     else
       # byebug
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
     @update = @article
     # byebug
     if @update.update(params_article)
-      flash[:notice] = "Article was successfully Updated"
+      flash[:success] = "Article was successfully Updated"
       redirect_to article_path(@update)
     else
       @edit = @update
@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
     @destory = @article
     id = @destory.id
     @destory.destroy
-    flash[:notice] =  "Article #{id} was successfully Deleted"
+    flash[:danger] =  "Article #{id} was successfully Deleted"
     redirect_to articles_path
 
   end

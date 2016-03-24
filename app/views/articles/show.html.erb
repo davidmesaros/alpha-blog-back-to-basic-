@@ -1,11 +1,15 @@
-<h1> Showing selected articles</h1>
 
-<p>
-  title: <%= @show.title %>
-</p>
-<p>
-  description: <%= @show.description %>
-</p>
-[<%= link_to 'Back to List', articles_path %>] ||
-<%= link_to 'edit', edit_article_path(@show) %>
-
+  <h2 align = "center">Title: <%= @show.title %> </h2> 
+  <div class="well col-xs-8 col-xs-offset-2" >
+    <h4 class="center"> <strong>Description:</strong></h4>
+    <hr>
+    <h5 class= 'description'><%= simple_format(@show.description) %></h5>
+    <div class="article-action">
+      
+    <%= link_to 'View List of Articles', articles_path, class: 'btn btn-ls btn-success' %> 
+    <%= link_to 'Edit Article', edit_article_path(@show), class: "btn btn-ls btn-primary"  %>
+    <%= link_to 'Delete Article', article_path(@show), method: :delete ,
+              data: { confirm: 'Are you sure?' }, 
+                  class: "btn btn-ls btn-danger"  %>
+    </div>
+  </div>

@@ -31,7 +31,7 @@ $navbar-default-bg: #565656;
   font-size: 35px;
   text-align: left;
   text-transform :uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 12px;
 }
 
 .btn-xlarge{
@@ -47,4 +47,37 @@ $navbar-default-bg: #565656;
 .footer{
   padding-top: 20px;
   border-top: 1px solid #eaeaea;
+}
+
+.col-xs-offset-2 {
+    margin-left: 13.666667%;
+}
+.col-xs-8 {
+    width: 69.666667%;
+}
+
+h1{
+  font-family: 'Roboto', sans-serif!important;
+  font-weight: 300;
+}
+
+.article-action{
+  border-top: 1px solid #eaeaea;
+  padding-top: 20px;
+}
+
+.description{
+  margin-bottom: 50px;
+}
+
+.article-title{
+  font-size: 15px;
+
+}
+
+.article-body{
+  border-top: 1px solid #eaeaea;
+  padding-top: 15px;
+  padding-bottom:   15px;
+
 }

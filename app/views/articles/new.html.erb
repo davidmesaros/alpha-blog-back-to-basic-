@@ -1,13 +1,7 @@
-<h1 align = 'center'>Create an article</h1>
- <% if @new.errors.any? %>
-  <h2> The following errors are preventing the article from getting created</h2>
-  <ul>
-    <% @new_article.errors.full_messages.each do |msg| %>
-      <li>
-        <%= msg %>
-      </li>
-    <% end %>
-  </ul>
- <% end %>
+
+  <h1 align = 'center'>Create an article</h1>
+
+
 <% @article = @new %>
+<%= render 'shared/error_messages_flash', obj: @article %>
 <%= render 'form' %>
