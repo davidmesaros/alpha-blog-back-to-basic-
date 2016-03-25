@@ -1,0 +1,5 @@
+<h1 align='center' > Edit Sign Up form </h1>
+<% @user = @edit  || @user = @update %>
+<%= render 'shared/error_messages_flash' , obj: @user %>
+<%= render 'form' %>
+

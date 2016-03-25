@@ -3,6 +3,20 @@ class UsersController < ApplicationController
     @new_user = User.new
   end
 
+  def edit
+    @edit = User.find(params[:id])
+  end
+
+  def update
+    @update = User.find(params[:id])
+    if @update.update(user_params)
+      flash[:success] = "your account has been update successfully"
+      redirect_to articles_path
+    else
+      render 'edit'
+    end
+  end
+
   def create
     # debugger
     @create_user = User.new(user_params)
@@ -11,6 +25,7 @@ class UsersController < ApplicationController
       flash[:success] = "You have signed up => congrat #{@create_user.username}"
       redirect_to articles_path
     else
+
       render 'new'
     end
 
