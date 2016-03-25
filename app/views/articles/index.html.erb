@@ -5,7 +5,11 @@
       <div class = "col-xs-8 col-xs-offset-2">
         <div class= "well well-lg">
           <div class ="article-title">
-
+            Created by: <%= list.user.username if list.user %> ||
+            <br>
+            Created  at: <%= time_ago_in_words(list.created_at) %>   || 
+            <br>
+            Last UpDated:  <%= time_ago_in_words(list.updated_at) %>
             Client id: <%= list.id %> <br>
             Title: <%= link_to list.title, article_path(list) %>
           </div>
