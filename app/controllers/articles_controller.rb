@@ -1,7 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :set_params, only: [:edit, :show, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only:[:edit, :show, :destroy]
+  
+
   def index
-    @All_Articles = Article.all
+    @All_Articles = Article.paginate(page: params[:page], per_page: 5)
+    # byebug
   end
 
   def new
@@ -64,5 +69,12 @@ class ArticlesController < ApplicationController
     end
     def params_article
         params.require(:article).permit(:title, :description)
+    end
+
+    def require_same_user
+      if current_user != @article.user
+        flash[:danger] = "Dude you cant access the page"
+        redirect_to root_path
+      end
     end
 end

@@ -2,6 +2,7 @@
     <h1>Alpha Blog</h1>
     <br>
     <canvas align="center"id="myChart" width="200" height="200"></canvas>
-
+    <% if !logged_in? %>
     <%= link_to "Sign Up Now", signup_path, :class => "btn btn-warning btn-lg btn-xlarge" %>
+    <% end %>
 </div>

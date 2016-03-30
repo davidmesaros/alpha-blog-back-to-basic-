@@ -1,0 +1,37 @@
+<div align ='center'>
+
+  <%= will_paginate obj,  :renderer => BootstrapPagination::Rails%>
+
+</div>
+<% obj.each do |list| %>
+
+    <div class="row">
+      <div class = "col-xs-8 col-xs-offset-2">
+        <div class= "well well-lg">
+          <div class ="article-title">
+            Created by: <%= list.user.username if list.user %> ||
+            <br>
+            Created  at: <%= time_ago_in_words(list.created_at) %>   || 
+            <br>
+            Last UpDated:  <%= time_ago_in_words(list.updated_at) %>
+            Client id: <%= list.id %> <br>
+            Title: <%= link_to list.title, article_path(list) %>
+          </div>
+          <div class= 'article-body'>
+            Description: <%= truncate(list.description, length: 100) %>
+          </div>
+          <% if logged_in? && current_user == list.user %>
+               <div class="article-action">
+            
+                  <%= link_to 'Edit all Article', edit_article_path(list), class: "btn btn-ls btn-primary"  %>
+                  <%= link_to 'Delete Article', article_path(list), method: :delete,
+                            data: { confirm: 'Are you sure?' }, 
+                                class: "btn btn-ls btn-danger"  %>
+
+                </div>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  <% end %>
+
