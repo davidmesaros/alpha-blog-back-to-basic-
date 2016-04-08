@@ -9,6 +9,9 @@
             <li><%= link_to gravator_for(userList, :size => 100), user_path(userList) %></li>
             <li class= 'article-title'><%= link_to userList.username, user_path(userList) %> </li>
             <li><small><%= pluralize(userList.articles.count, 'article') if userList.articles %> </small></li>
+            <% if logged_in? && current_user.admin? %>
+                <li><%= link_to "Delete this User", user_path(userList), method: :delete, data: {confirm: 'Are you sure buddy delete the User and all its articles'} %></li>
+            <% end %>
           </div>
         </div>
       </ul>

@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   def create
     # render text: params[:article].inspect
     @new_article = Article.new(params_article)
-    @new_article.user = User.first
+    @new_article.user = current_user
 
     if @new_article.save
       flash[:success] = "Article was successfully created"  
@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
     end
 
     def require_same_user
-      if current_user != @article.user
+      if current_user != @article.user && !current_user.admin?
         flash[:danger] = "Dude you cant access the page"
         redirect_to root_path
       end

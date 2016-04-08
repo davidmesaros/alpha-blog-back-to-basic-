@@ -17,7 +17,7 @@
     <hr>
     <h5 class= 'description'><%= simple_format(@show.description) %></h5>
     <div class="article-action">
-    <% if logged_in? && current_user === @show.user %>
+    <% if logged_in? && (current_user == @show.user || current_user.admin?) %>
         <%= link_to 'View List of Articles', articles_path, class: 'btn btn-ls btn-success' %> 
         <%= link_to 'Edit Article', edit_article_path(@show), class: "btn btn-ls btn-primary"  %>
         <%= link_to 'Delete Article', article_path(@show), method: :delete ,

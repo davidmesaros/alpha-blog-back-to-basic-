@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show] 
-  before_action :require_user_same, only: [:edit, :update]
+  before_action :require_user_same, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:destory]
   def index
     @All_users = User.paginate(page: params[:page], per_page: 5)
   end
@@ -27,8 +28,9 @@ class UsersController < ApplicationController
     @create_user = User.new(user_params)
     # debugger
     if @create_user.save
+      session[:user_id] = @create_user.id
       flash[:success] = "You have signed up => congrat #{@create_user.username}"
-      redirect_to articles_path
+      redirect_to user_path(@create_user)
     else
 
       render 'new'
@@ -41,6 +43,13 @@ class UsersController < ApplicationController
     @show_articles = @show.articles.paginate(:page => params[:page],per_page: 5)
   end
 
+  def destroy
+    @user_destory = User.find(params[:id])
+    @user_destory.destroy
+    flash[:danger] = "User and all articles will be deleted"
+    redirect_to users_path
+  end
+
   private
     def user_params
       params.require(:user).permit(:username, :email, :password_digest)
@@ -51,10 +60,17 @@ class UsersController < ApplicationController
     end
 
     def require_user_same
-      if logged_in? || current_user != @user
+      if current_user != @user && !current_user.admin?
         flash[:danger] = "User has to be logged in dude"
         redirect_to root_path
       end
+    end
+
+    def require_admin
+      if logged_in? && !current_user.admin?
+      flash[:danger] = "Only Admin can delete Users"
+      redirect_to root_path
+      end      
     end
 
 end
