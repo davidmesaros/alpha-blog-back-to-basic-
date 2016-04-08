@@ -1,27 +1,46 @@
-require "test_helper"
+require 'test_helper'
 
 class CreateCategoriesTest < ActionDispatch::IntegrationTest
-  test "get new category form and create category" do
-    get new_category_path
-    assert_template "categories/new"
-    assert_difference "Category.count" , 1 do
-      post_via_redirect categories_path, category: {name: "sport"}
-    end
 
-    assert_template "categories/index"
-    # assert_match "sports", response.body
+  def setup
+    @user = User.create(username: "john", email: "john@example.com", password: "password", admin: true)
   end
+  
+  test "get new category form and create category" do
+    # sign_in_as(@user, "password")
+    get new_category_path
+    assert_template 'categories/new'
     
-    test "invalid category submission results in failure" do
-      get new_category_path
-      assert_template 'categories/new'
+      assert_difference 'Category.count', 1 do
+      post_via_redirect categories_path, category: {name: "sports"}
+      end
+
+    assert_template 'categories/index'
+    assert_match "sports", response.body
+
+  end
+
+  test "invalid category submission results in failure" do
+    sign_in_as(@user, "password")
+    get new_category_path
+    assert_template 'categories/new'
       assert_no_difference 'Category.count' do
       post categories_path, category: {name: " "}
-    end
-    
+
+      end
+
     assert_template 'categories/new'
-    # assert_select 'h2.panel-title'
-    #assert_select 'div.panel-body'
+    assert_select 'h2.panel-title'
+
+    assert_select 'div.panel-body'
 
   end
+
 end
+
+  #Add sign_in_user method to test_helper.rb file under test folder:
+  # def sign_in_as(user, password)
+  #   post login_path, session: {email: user.email, password: password}
+  # end
+
+
